@@ -54,45 +54,61 @@ function replaceTitleAndContent($apiResponse, $data, $title = '')
     return $result;
 }
 
-$jsonString = '{
-    "code": 200,
-    "message": "OK",
-    "moderationType": 3,
-    "moderationResult": [
-        {
-            "code": 200,
-            "message": "OK",
-            "machineSuggestion": 3,
-            "machineTagL1": "涉政",
-            "machineTagL2": "",
-            "machineTagL3": "",
-            "contentId": "content",
-            "uniqueId": "674d1bf989b81c0001bf75ea",
-            "matchedList": [
-                {
-                    "keyword": "习近平",
-                    "tag": "涉政:国内领导人及相关",
-                    "description": "",
-                    "position": [
-                        5,
-                        8
-                    ],
-                    "full_position": [
-                        [
+/**
+ * demo1
+ * @return void
+ */
+function demo1() {
+    $jsonString = '{
+        "code": 200,
+        "message": "OK",
+        "moderationType": 3,
+        "moderationResult": [
+            {
+                "code": 200,
+                "message": "OK",
+                "machineSuggestion": 3,
+                "machineTagL1": "涉政",
+                "machineTagL2": "",
+                "machineTagL3": "",
+                "contentId": "content",
+                "uniqueId": "674d1bf989b81c0001bf75ea",
+                "matchedList": [
+                    {
+                        "keyword": "习近平",
+                        "tag": "涉政:国内领导人及相关",
+                        "description": "",
+                        "position": [
                             5,
                             8
-                        ]
-                    ],
-                    "customType": 1
-                }
-            ]
-        }
-    ],
-    "requestId": "84a3c665-b055-11ef-9d77-fa163e9175ff"
-}';
+                        ],
+                        "full_position": [
+                            [
+                                5,
+                                8
+                            ]
+                        ],
+                        "customType": 1
+                    }
+                ]
+            }
+        ],
+        "requestId": "84a3c665-b055-11ef-9d77-fa163e9175ff"
+    }';
+    
+    // 将 JSON 字符串反序列化为 PHP 对象
+    $data = json_decode($jsonString, true);
+    
+    
+    $result = replaceTitleAndContent($data, '正文审核：习近平', '标题审核');
+    
+}
 
-// 将 JSON 字符串反序列化为 PHP 对象
-$data = json_decode($jsonString, true);
+// 调用demo1函数，因为php中没有main函数；
+// demo1();
 
+function generateRandomString($length = 10) {
+    return bin2hex(random_bytes($length / 2));
+}
 
-$result = replaceTitleAndContent($data, '正文审核：习近平', '标题审核');
+echo generateRandomString(16); // 生成长度为 16 的随机字符串
