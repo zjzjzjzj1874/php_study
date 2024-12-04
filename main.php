@@ -110,5 +110,30 @@ function demo1() {
 function generateRandomString($length = 10) {
     return bin2hex(random_bytes($length / 2));
 }
+// 找到符合条件的记录
+db.svdWorks.find({
+    'account._id': ObjectId("674d6e40c7e8ee55d705286c"),
+    firstEvilName: ''
+}).sort({ createTime: -1 }).limit(1).forEach(function(doc) {
+    
+    // 遍历 contents 数组
+    doc.contents.forEach(function(content) {
+        if (content.class === '音频') {
+            // 获取当前 contentId
+            let currentContentId = content.contentId;
+            // 从 body 中提取新的 contentId
+            let newContentId = content.body.split('/').pop().split('-').pop(); // 提取最后一部分
+            // 更新 contentId
+            content.contentId = 'kuaishou-audio-' + newContentId; 
+        }
+    });
 
+    // 更新文档
+    db.svdWorks.updateOne(
+        { _id: doc._id },
+        { $set: { contents: doc.contents } }
+    );
+});
 echo generateRandomString(16); // 生成长度为 16 的随机字符串
+
+
