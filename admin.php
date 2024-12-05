@@ -4,6 +4,21 @@ $config = include "config.php";
 date_default_timezone_set($config['timezone']);
 
 /**
+ * 文件夹
+ * @return void
+ */
+function dir_try() 
+{
+    echo "--------------- dir --------------\n";
+
+    $pwd = getcwd();
+    echo "pwd = ", $pwd, PHP_EOL;
+
+    $d = dir($pwd);
+    echo print_r($d).PHP_EOL;
+}
+
+/**
  * date函数
  * @return void
  */
@@ -191,5 +206,9 @@ curl_post();
 // region date
 date_try();
 // endregion date
+
+// region dir
+dir_try();
+// endregion dir
 
 ?>

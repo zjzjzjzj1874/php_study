@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html>
-<body>
-    
 <?php
-echo "hello world from home.". PHP_EOL;
 
-$brands = array("YY", "Lining", "Victor");
-foreach ($brands as $brand) {
-    echo "brand: ". $brand."\n". PHP_EOL;
-}
+require_once "source/class_student.php";
+
+$stu = new student("张三");
+echo $stu;
+echo "【run】" . $stu->run();
+
 ?>
-
-</body>
-</html>
