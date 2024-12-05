@@ -1,5 +1,34 @@
 <?php
 
+$config = include "config.php";
+date_default_timezone_set($config['timezone']);
+
+/**
+ * date函数
+ * @return void
+ */
+function date_try()
+{
+    // 获取UTC时区的时间
+    $d = date(DATE_RFC3339);
+    echo "date = ". $d . PHP_EOL;
+
+    $ts = time();
+    echo "时间戳：". $ts.PHP_EOL;
+    echo "格式化：". date(DATE_RFC3339, $ts).PHP_EOL;
+    echo "格式化：". date('Y-m-d H:i:s', $ts).PHP_EOL;
+
+    // echo "sun info: ", print_r(date_sun_info($ts, 104.065735, 30.659462)), PHP_EOL;
+    // echo "sunrise:", date_sunrise($ts);
+    // echo "sunset:", date_sunset($ts);
+
+    // echo print_r(getdate()), PHP_EOL;
+
+    $lt = localtime();
+    echo "------------------\n";
+    // echo print_r($lt), PHP_EOL;
+}
+
 /**
  * curl发送post、get、put、delete等请求。
  * 要使用cURL来发送url请求，具体步骤大体分为以下四步：
@@ -155,9 +184,12 @@ echo "hello world from admin.". PHP_EOL;
 // endregion 数组
 
 // region curl
-curl_get();
+// curl_get();
 curl_post();
 // endregion curl
 
+// region date
+date_try();
+// endregion date
 
 ?>
