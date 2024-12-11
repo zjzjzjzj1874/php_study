@@ -22,6 +22,10 @@ php-demo
 echo substr(__FILE__,strlen(__DIR__)-strlen(__FILE__)+1);
 ```
 
+### 命名空间下函数package最佳实践
+* 如果函数数量少，直接 use function 是[最佳方式](./source/logger.php)。
+* 如果数量多且逻辑相关，推荐封装为[类的静态方法](./source/Test.php)。
+* 如果需要全局可用，使用 require 或手动导出命名空间函数。
 
 
 ## 参考资料
