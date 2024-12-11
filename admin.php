@@ -6,6 +6,11 @@ require_once __DIR__ . '/source/logger.php';
 use Utils\Test;
 use Utils\Https;
 
+Utils\Test::test(); // 注意：这种写法要求FUNCTION是Public static的，否则必须实例化Class之后才能调用
+// Utils\Test::test1(); // 这种函数不是public static的，调用不对 => 使用下面的方法调用。
+$test = new Test();
+$test->test1(); 
+
 
 // 引入配置
 $config = include "config.php";

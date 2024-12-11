@@ -4,8 +4,13 @@ namespace Utils;
 
 class Test 
 {
-    // 构造函数，缺省也可以
-    public function __construct() {}
+    // 魔术方法：构造函数，缺省也可以
+    public function __construct() {
+        echo "调用构造函数。。。。".PHP_EOL;
+    }
+    public function __destruct() {
+        echo "调用析构函数。。。。".PHP_EOL;
+    }
 
     /**
      * array数组尝试
@@ -58,7 +63,14 @@ class Test
         array_push($cars, "su7", "Nio", "xiaopeng");
         print_r($cars);
     }
-
+    public static function test()
+    {
+        echo "test in test.php".PHP_EOL;
+    }
+    function test1()
+    {
+        echo "test111 in test.php".PHP_EOL;
+    }
     /**
      * 文件夹
      * @return void

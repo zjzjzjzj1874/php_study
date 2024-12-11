@@ -2,6 +2,7 @@
 
 namespace Utils;
 
+// 注意enum是8.0之后引入的，8.0之前可能不兼容。
 enum LoggerType: string {
     case DEBUG = "debug";
     case INFO = "info";
