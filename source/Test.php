@@ -4,12 +4,15 @@ namespace Utils;
 
 class Test 
 {
+    var $name; // 名称，已经被遗弃，需要自己定义。
+
     // 魔术方法：构造函数，缺省也可以
-    public function __construct() {
-        echo "调用构造函数。。。。".PHP_EOL;
+    function __construct() {
+        print "构造函数\n";
+        $this->name = "Test";
     }
-    public function __destruct() {
-        echo "调用析构函数。。。。".PHP_EOL;
+    function __destruct() {
+        print "销毁 " . $this->name . "\n";
     }
 
     /**
