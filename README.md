@@ -6,21 +6,6 @@ php-demo
 
 ### datetime的使用
 
-### 魔术方法
-* __construct()：构造函数，创建时自动调用
-* __destruct()：析构函数，销毁时自动调用
-* __call()：调用一个未定义或不可访问的方法时自动调用
-* __callStatic()：调用一个未定义或不可访问的静态方法时自动调用
-* __get()：访问未定义或不可访问的属性时自动调用
-* __set()：设置未定义或不可访问的属性时自动调用
-* __isset()：使用isset或者empty检查未定义或不可访问的属性时自动调用
-* __unset()：调用unset试图删除未定义或不可访问的属性时自动调用
-* __sleep()：对象序列化时自动调用，返回需要序列化的属性数组
-* __wakeup()：反序列化是自动调用
-* __toString()：对象被当做字符串使用时自动调用
-* __invoke()：尝试调用一个对象作为函数时自动调用
-
-
 ### 魔术常量
 > 程序异常时可以根据魔术常量打印出具体的位置。
 * __LINE__: 文件中的当前行号
@@ -58,6 +43,100 @@ echo substr(__FILE__,strlen(__DIR__)-strlen(__FILE__)+1);
 * $http_response_header：Http响应头
 * $argc：传递给脚本的参数数目
 * $argv：传递给脚本的参数数组
+
+## 面向对象
+
+### 魔术方法
+* __construct()：构造函数，创建时自动调用
+* __destruct()：析构函数，销毁时自动调用
+* __call()：调用一个未定义或不可访问的方法时自动调用
+* __callStatic()：调用一个未定义或不可访问的静态方法时自动调用
+* __get()：访问未定义或不可访问的属性时自动调用
+* __set()：设置未定义或不可访问的属性时自动调用
+* __isset()：使用isset或者empty检查未定义或不可访问的属性时自动调用
+* __unset()：调用unset试图删除未定义或不可访问的属性时自动调用
+* __sleep()：对象序列化时自动调用，返回需要序列化的属性数组
+* __wakeup()：反序列化是自动调用
+* __toString()：对象被当做字符串使用时自动调用
+* __invoke()：尝试调用一个对象作为函数时自动调用
+
+### 接口
+使用接口，可以指定某个类必须实现哪些方法，但不需要定义这些方法的具体内容；不实现的话会报一个致命错误。
+接口中定义的所有方法必须是公有的。
+类可以实现多个接口，用逗号分隔解耦名称。
+```php
+interface iAnimal
+{
+    public function setName($name);
+    public function makeSound($msg);
+}
+interface iColor
+{
+    public function setColor($color);
+}
+
+class Cat implements iAnimal, iColor
+{
+    private $name;
+    private $color;
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function makeSound($msg)
+    {
+        echo "hello:".$msg.PHP_EOL;
+    }
+
+    public function setColor($color)
+    {
+    $this->color = $color;
+    }
+}
+```
+
+### Static关键字
+申明类属性或方法为static，可以不实例化类而直接访问；
+静态属性不能通过一个类已实例化的对象来访问，但静态方法可以。
+
+## 注意事项
+* 函数体内引用全局变量，必须在内部使用`global`关键字；
+```php
+<?php
+$a = 1;
+function Test() {
+    global $a;
+    echo "a = ". $a . PHP_EOL;
+}
+?>
+```
+* php注释
+```php
+// 注释1
+/* 注释2 */
+# 注释3
+```
+* php变量不能含有`-`
+* php常量申明 `define("PI", 3.14);`
+
+* php中，函数对大小写不敏感
+```php
+function Test() {
+    echo "Hello World";
+}
+test(); // 这样可以调用
+```
+* 但是变量大小写敏感
+```php
+$var = 'a';
+$VAR = 'b';
+echo "$var$VAR"; // 输出：ab
+```
+* 空数组会转化为null `$a = array(); 其实$a == null;`
+* 一个类只能实现一个基类，但是可以实现多个接口
+* include文件时，对引入的文件个数没有限制，同一个文件可以引入两次，但是如果有类重复定义的话，可能会报错。
 
 
 ## 参考资料

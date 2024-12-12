@@ -5,6 +5,10 @@ namespace Utils;
 class Test 
 {
     var $name; // 名称，已经被遗弃，需要自己定义。
+    var $var1 = "hello"; // 变量var1的默认值是 hello。
+    public $var2; // 如果使用var定义的，被视为公有(public)：公有的类成员可以在任何地方被访问
+    protected $var3; // 受保护的，可以被自身以及子类和父类访问
+    private $var4; // 私有的，只能被其定义所在的类访问
 
     // 魔术方法：构造函数，缺省也可以
     function __construct() {
